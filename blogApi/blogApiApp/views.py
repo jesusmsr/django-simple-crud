@@ -35,3 +35,13 @@ def delete_post(request):
         return Response({"Success": "Post deleted successfully"}, status=200)
     except Post.DoesNotExist:
         return Response({"Error": "The post does not exist"}, status=404)
+
+@api_view(['GET'])
+def get_post_by_id(request):
+    post_id = request.data.get('post_id')
+    try:
+        post = Post.objects.get(id=post_id)
+        serializer = PostSerializer(post)
+        return Response(serializer.data)
+    except Post.DoesNotExist:
+        return Response({"Error": "Post does not exist"})
