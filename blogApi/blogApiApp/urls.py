@@ -7,4 +7,5 @@ urlpatterns = [
     path('api/create-post/', views.create_post),
     path('api/delete-post/', views.delete_post),
     path('api/get-post/', views.get_post_by_id),
+    path('api/update-post/', views.update_post),
 ]
