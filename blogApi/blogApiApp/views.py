@@ -27,8 +27,7 @@ def create_post(request):
         return Response(serializer.errors, status=400)
 
 @api_view(['DELETE'])
-def delete_post(request):
-    post_id = request.data.get('post_id')
+def delete_post(request, post_id):
     try:
         post = Post.objects.get(id=post_id)
         post.delete()
@@ -37,8 +36,7 @@ def delete_post(request):
         return Response({"Error": "The post does not exist"}, status=404)
 
 @api_view(['GET'])
-def get_post_by_id(request):
-    post_id = request.data.get('post_id')
+def get_post_by_id(request, post_id):
     try:
         post = Post.objects.get(id=post_id)
         serializer = PostSerializer(post)
@@ -47,8 +45,7 @@ def get_post_by_id(request):
         return Response({"Error": "Post does not exist"})
 
 @api_view(['PUT'])
-def update_post(request):
-    post_id = request.data.get('post_id')
+def update_post(request, post_id):
     new_title = request.data.get('title')
     new_content = request.data.get('content')
     try:
